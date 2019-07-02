@@ -19,5 +19,6 @@
 ### 1.1.2流处理
 * 流是一系列数据项，一次只生成一项。程序可以从输入流中一个一个读取数据项，然后以同样的方式将数据项写入输入流。
 * 一个实际的例子是在Unix或Linux中，很多程序都从标准输入（Java中的System.in）读取数据，然后把结果写入标准输出（Java中的System.out）。
-* Unix命令：![Unix命令.png](https://s2.ax1x.com/2019/07/02/ZYVOdf.png)
+* Unix命令：
+<br>![Unix命令.png](https://s2.ax1x.com/2019/07/02/ZYVOdf.png)
 
