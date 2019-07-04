@@ -55,3 +55,63 @@
 * `Stream API`就是构建在通过传递代码使操作行为实现参数化的思想上的，当把`compareUsingCustomerId`传进去，你就把`sort`的行为参数化了。<br>
 
   ![Ztn3Ux.png](https://s2.ax1x.com/2019/07/03/Ztn3Ux.png)
+
+###  1.1.4 并行与共享的可变数据
+
+###  1.1.5 java需要演变
+
+
+
+## 1.2 java中的函数
+
+* java程序可能操作的值
+
+  * 原始值：42（int类型）、3.14（double类型）
+
+  * 对象的引用
+
+  * 函数（java8中新增，值的一种形式）
+
+    
+### 1.2.1 方法和Lambda作为一等公民
+
+* 我们介绍java8的第一个新功能是<font face=楷体>方法引用</font>
+
+  比方说，你想要的筛选一个目录的所有隐藏文件，老写法：
+
+  ```java 
+  /*
+  		 * 接口是不可以实例化的。
+  		 * new FileFilter(){}是匿名内部类的写法。
+  		 * 它实例化了一个匿名内部类，而这个匿名内部类实现了FileFilter接口。
+  		 */
+  		/*
+  		File[] hiddenFiles = new File(".").listFiles(new FileFilter(){
+  			public boolean accept(File file){
+  				return file.isHidden();
+  			}
+  		});
+  		*/
+  ```
+
+  
+
+  如今在Java8里，你可以把代码重写成这个样子：
+
+  ```JAVA 
+  /*
+  		 * java8里，你可以把代码重写成这个样子：
+  		 */
+  		File[] hiddenFiles = new File(".").listFiles(File::isHidden);
+  ```
+
+  
+
+  你已经有了函数`isHidden`，因此只需用Java8的<font face=楷体>方法引用</font>：：语法（即“把这个方法作为值”）将其传给`listFiles`方法。
+
+* Lambda——匿名函数
+
+  除了允许函数成为一等公民外，Java8还体现了更广义的将<font face=楷体>函数</font>作为<font face=楷体>值  </font>的思想，包括Lambda（匿名函数）。
+
+  你现在可以写`(int x)-> x+1`，表示“调用时给定参数`x`，就返回`x+1`值的函数”。
+
