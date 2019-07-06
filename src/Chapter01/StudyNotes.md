@@ -115,3 +115,93 @@
 
   你现在可以写`(int x)-> x+1`，表示“调用时给定参数`x`，就返回`x+1`值的函数”。
 
+###  1.2.2 传递代码：一个例子
+
+完整代码：[筛选苹果](https://github.com/java8/Java8InAction/blob/master/src/main/java/lambdasinaction/chap1/FilteringApples.java)
+
+* 筛选出绿苹果
+
+  ```java 
+  public static List<Apple> filterGreenApples(List<Apple> inventory){
+          List<Apple> result = new ArrayList<>();
+          for(Apple apple:inventory){
+              if("green".equals(apple.getColor())){
+                  result.add(apple);
+              }
+          }
+          return result;
+      }
+  ```
+
+* 筛选出超过150克的苹果
+
+  ```java 
+  public static List<Apple> filterHeavyApples(List<Apple> inventory){
+          List<Apple> result = new ArrayList<>();
+          for(Apple apple:inventory){
+              if(apple.getWeight() > 150){
+                  result.add(apple);
+              }
+          }
+          return result;
+      }
+  ```
+
+这两个方法只有一行不同：if语句那行。
+
+* `Java8`会把条件代码作为参数传递进去，这样可以避免`filter`方法出现重复的代码。
+
+  ```java 
+  public static boolean isGreenApple(Apple apple){
+          return "green".equals(apple.getColor());
+      }
+  
+      public  static boolean isHeavyApple(Apple apple){
+          return apple.getWeight() > 150;
+      }
+  
+      public interface Predicate<T>{
+          boolean test(T t);
+      }
+  
+      static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p){
+          List<Apple> result = new ArrayList<>();
+          for(Apple apple:inventory){
+              if(p.test(apple)){
+                  result.add(apple);
+              }
+          }
+          return result;
+      }
+  ```
+
+  
+
+* 使用`isGreenApple`方法和`isHeavyApple`方法：
+
+  ```java 
+  List<Apple> inventory = Arrays.asList(new Apple(80,"green"),
+                  new Apple(155,"green"),
+                  new Apple(120,"red"));
+  
+  List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
+  System.out.println(greenApples);
+  
+  List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
+  System.out.println(heavyApples);
+  ```
+
+* 输出结果：
+
+  ```JAVA 
+  [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
+  [Apple{color='green', weight=155}]
+  ```
+
+* 什么是谓词：
+
+  前面的代码传递了方法`FilteringApples::isGreenApple`给`filterApples`方法，后者希望接受一个`Predicate<Apple>`参数。
+
+  **谓词（predicate）**在数学上常常用来代表一个类似函数的东西，它接受一个参数值，并返回`true`或`false`。
+
+  你在后面会看到，Java8允许你写`Function<Apple,Boolean>`，但用`Predicate<Apple>`是更标准的方式，效率也会更高一些。
