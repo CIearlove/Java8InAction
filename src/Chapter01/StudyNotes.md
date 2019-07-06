@@ -205,3 +205,17 @@
   **谓词（predicate）**在数学上常常用来代表一个类似函数的东西，它接受一个参数值，并返回`true`或`false`。
 
   你在后面会看到，Java8允许你写`Function<Apple,Boolean>`，但用`Predicate<Apple>`是更标准的方式，效率也会更高一些。
+
+### 1.2.3 从传递方法到Lambda 
+
+* 把方法作为值来传递显然很有用，但要是为类似于`isGreenApple`和`isHeavyApple`这种可能只用一两次的短方法写一堆定义就优点烦人了。Java8中可以使用匿名函数（Lambda）：
+
+  ```JAVA 
+  filterApples(inventory, (Apple a)->"green".equals(a.getColor()));
+  
+  filterApples(inventory, (Apple a)->a.getWeight()>150);
+  ```
+
+  你甚至不需要为只用一次的方法写定义。
+
+* 但要是Lambda的长度多于几行的话，那你还是应该用方法引用来指向一个有描述性名称的方法，而不是使用匿名类的Lambda。
