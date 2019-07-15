@@ -5,30 +5,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FilteringApples {
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         List<Apple> inventory = Arrays.asList(new Apple(80,"green"),
                 new Apple(155,"green"),
                 new Apple(120,"red"));
 /*
-        //方法引用
+        //鏂规硶寮曠敤
         List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
         System.out.println(greenApples);
-        //方法引用
+        //鏂规硶寮曠敤
         List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
         System.out.println(heavyApples);
 */
-        //匿名函数
+        //鍖垮悕鍑芥暟
         List<Apple> greenApples1 = filterApples(inventory, (Apple a)->"green".equals(a.getColor()));
         System.out.println(greenApples1);
-        //匿名函数
+        //鍖垮悕鍑芥暟
         List<Apple> heavyApples1 = filterApples(inventory, (Apple a)->a.getWeight()>150);
         System.out.println(heavyApples1);
 	}
 
     /**
-     * 筛选出所有的绿苹果，并返回一个列表
+     * 绛涢�夊嚭鎵�鏈夌殑缁胯嫻鏋滐紝骞惰繑鍥炰竴涓垪琛�
      * @param inventory
      * @return
      */
@@ -44,7 +43,7 @@ public class FilteringApples {
     }
 
     /**
-     * 选出超过150克的苹果
+     * 閫夊嚭瓒呰繃150鍏嬬殑鑻规灉
      * @param inventory
      * @return
      */
