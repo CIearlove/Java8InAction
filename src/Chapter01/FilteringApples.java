@@ -11,23 +11,23 @@ public class FilteringApples {
                 new Apple(155,"green"),
                 new Apple(120,"red"));
 /*
-        //鏂规硶寮曠敤
+        //筛选出绿苹果
         List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
         System.out.println(greenApples);
-        //鏂规硶寮曠敤
+        //筛选出重苹果
         List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
         System.out.println(heavyApples);
 */
-        //鍖垮悕鍑芥暟
+        //筛选出绿苹果
         List<Apple> greenApples1 = filterApples(inventory, (Apple a)->"green".equals(a.getColor()));
         System.out.println(greenApples1);
-        //鍖垮悕鍑芥暟
+        //筛选出重苹果
         List<Apple> heavyApples1 = filterApples(inventory, (Apple a)->a.getWeight()>150);
         System.out.println(heavyApples1);
 	}
 
     /**
-     * 绛涢�夊嚭鎵�鏈夌殑缁胯嫻鏋滐紝骞惰繑鍥炰竴涓垪琛�
+     * 传统的方式筛选出绿苹果
      * @param inventory
      * @return
      */
@@ -43,7 +43,7 @@ public class FilteringApples {
     }
 
     /**
-     * 閫夊嚭瓒呰繃150鍏嬬殑鑻规灉
+     * 传统的方式筛选出重苹果
      * @param inventory
      * @return
      */
@@ -70,6 +70,16 @@ public class FilteringApples {
         boolean test(T t);
     }
 
+    /**
+     * @MethodName
+     * @Description
+     * @param null
+     * @Return
+     * @Throw
+     * @Author chenjr <chenjr@si-tech.com.cn>
+     * @Version V1.0.0
+     * @Since 2020/12/14
+     */
     static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p){
         List<Apple> result = new ArrayList<>();
         for(Apple apple:inventory){
