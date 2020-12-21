@@ -3,8 +3,10 @@ package Internet;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -126,4 +128,34 @@ public class LearningOptionalClass {
 
         assertTrue(result.isPresent());
     }
+
+    @Test
+    public void whenEmptyOptional_thenGetValueFromOr() {
+        User result = (User) Optional.ofNullable(null)
+                .or( () -> Optional.of(new User("default","1234"))).get();
+
+        assertEquals(result.getEmail(), "default");
+    }
+
+    //通过把实例转换为 Stream 对象，让你从广大的 Stream API 中受益
+    @Test
+    public void whenGetStream_thenOk() {
+        User user = new User("john@gmail.com", "1234");
+        List<String> emails = Optional.ofNullable(user)
+                .stream()
+                .filter(u -> u.getEmail() != null && u.getEmail().contains("@"))
+                .map( u -> u.getEmail())
+                .collect(Collectors.toList());
+
+        assertTrue(emails.size() == 1);
+        assertEquals(emails.get(0), user.getEmail());
+    }
+
+    /*
+    注意：
+    在使用 Optional 的时候需要考虑一些事情，以决定什么时候怎样使用它。
+    重要的一点是 Optional 不是 Serializable。因此，它不应该用作类的字段。
+    Optional 主要用作返回类型。
+     */
+
 }
