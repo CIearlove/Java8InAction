@@ -30,7 +30,7 @@ public class LearningOptionalClass {
         //whenValueNotNull_thenIgnoreDefault();
         //whenThrowException_thenOk();
         //whenMap_thenOk();
-        whenFlatMap_thenOk();
+        //whenFlatMap_thenOk();
     }
     //´´½¨ OptionalÊµÀý
     @Test(expected = NoSuchElementException.class)
